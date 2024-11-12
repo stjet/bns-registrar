@@ -1,0 +1,40 @@
+@font-face {
+  font-family: Arimo;
+  src: local("Arimo"), url("/fonts/Arimo.ttf");
+}
+
+:root {
+  --yellow: #FBDD11;
+  --green: #4CBF4B;
+  --grey1: #2A2A2E;
+  --grey2: #212124;
+}
+
+*:not(code) {
+  font-family: Arimo;
+  margin: 0;
+  color: var(--grey1);
+}
+
+.error {
+  color: red;
+  background-color: var(--yellow);
+}
+
+.middle {
+  text-align: center;
+}
+
+.button {
+  background-color: var(--yellow);
+  border: 1px solid black;
+  border-radius: 15px;
+  padding: 15px;
+  font-weight: bold;
+}
+
+.button:hover {
+  cursor: pointer;
+  background-color: #eacf1e;
+}
+
