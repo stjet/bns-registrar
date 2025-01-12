@@ -11,8 +11,8 @@ export const POST: RequestHandler = async ({ request }) => {
   const { domain, send_to_pub_key } = await request.json();
   if (!domain || !send_to_pub_key) {
     return error(400, "Missing one or more of the required fields `domain` and `send_to_pub_key`");
-  } else if (!is_domain_name_allowed(domain) || domain.length < 4) {
-    return error(400, "Domain name has disallowed characters or is shorter than 4 characters");
+  } else if (!is_domain_name_allowed(domain) || domain.length < 4 || domain.length > 32) {
+    return error(400, "Domain name has disallowed characters, is shorter than 4 characters, or is longer than 32 characters");
   } else if (!is_valid_public_key(send_to_pub_key)) {
     return error(400, "`send_to_pub_key` is invalid");
   }

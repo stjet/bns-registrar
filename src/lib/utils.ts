@@ -14,7 +14,7 @@ export function get_price(dl: number): number {
   } else if (dl === 9) {
     return 420;
   } else if (dl > 9) {
-    return 1;//190;
+    return 190;
   } else {
     return 99999; //currently <4 length domains not buyable, but just in case...
   }

@@ -38,3 +38,7 @@
   background-color: #eacf1e;
 }
 
+code {
+  word-wrap: break-word;
+}
+

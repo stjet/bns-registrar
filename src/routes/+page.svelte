@@ -92,15 +92,34 @@
     </div>
     <div id="get" class="half">
       <div id="get-child">
+        <h1 id="mobile-title">Buy a .ban Domain</h1>
         <div id="input-container">
-          <input placeholder="Get your .ban on" maxlength="48" onkeydown={domain_keydown} onkeyup={domain_keyup} bind:value={domain_content} type="text"/><span>.ban</span><input onclick={domain_next} type="button" value="-->"/>
+          <input placeholder="Get your .ban on" maxlength="32" onkeydown={domain_keydown} onkeyup={domain_keyup} bind:value={domain_content} type="text"/><span>.ban</span><input onclick={domain_next} type="button" value="-->"/>
         </div>
         <span id="price">{price}</span>
         <span class="error">{error}</span>
         <div>
           <h2>Supported by:</h2>
           <div>
-            <span>Bananostand</span>
+            <a href="https://thebananostand.com" target="_blank">Bananostand</a>
+            <br>
+            <a href="https://creeper.banano.cc" target="_blank">Creeper</a>
+            <br>
+            <a href="https://banano.nano.trade/b" target="_blank">Kuyumucu (banano.trade)</a>
+            <br>
+            <a href="https://www.banano-sports-pools.xyz" target="_blank">Banano Sports Pools</a>
+            <br>
+            <a href="https://gorillanation.cc" target="_blank">Gorilla Nation</a>
+            <br>
+            <a href="https://monke42.link" target="_blank">Monke42.link</a>
+            <br>
+            <a href="https://faucet.banxno.com/" target="_blank">BanXNO Faucet</a>
+            <br>
+            <a href="https://faucet.prussia.dev/" target="_blank">faucet.prussia.dev</a>
+            <br>
+            <a href="https://banfts.prussia.dev/explorer" target="_blank">Banfts (search)</a>
+            <br>
+            <span>And more in the near future!</span>
           </div>
         </div>
         <p id="bottom-2">.ban is the first publicly available top level domain (TLD) for the <a href="https://github.com/stjet/bns/blob/master/bns_protocol.md">Banano Name Service protocol (BNS)</a></p>
@@ -150,6 +169,9 @@
 
   hr {
     margin: 1px 0;
+    border-style: solid;
+    border-color: var(--grey1);
+    width: 100%;
   }
 
   .thickest {
@@ -193,14 +215,14 @@
 
   #input-container input[type="text"] {
     padding-left: 3px;
-    width: calc(65% - 3px);
+    width: calc(63% - 3px);
     border-top-left-radius: 10px;
     border-bottom-left-radius: 10px;
   }
   
   #input-container span {
     display: inline-block;
-    width: 10%;
+    width: 12%;
     text-align: center;
   }
 
@@ -217,5 +239,24 @@
     height: 16px;
     width: 16px;
     margin-top: 2px;
+  }
+
+  #mobile-title {
+    display: none;
+  }
+
+  @media only screen and (max-width: 900px) {
+    #pitch {
+      display: none;
+    }
+
+    #front {
+      grid-template-columns: 100vw;
+    }
+
+    #mobile-title {
+      display: block;
+      margin-bottom: 19px;
+    }
   }
 </style>
