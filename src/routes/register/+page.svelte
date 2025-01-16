@@ -4,6 +4,7 @@
 
   import { Progress } from "$lib/types";
   import Seed from "$lib/Seed.svelte";
+  import ConfirmSeed from "$lib/ConfirmSeed.svelte";
   import Payment from "$lib/Payment.svelte";
   import Declare from "$lib/Declare.svelte";
 
@@ -40,6 +41,8 @@
   <div class="middle">
     {#if progress === Progress.Seed}
       <Seed bind:progress {bsf_seed}/>
+    {:else if progress === Progress.ConfirmSeed}
+      <ConfirmSeed bind:progress {bsf_seed}/>
     {:else if progress === Progress.Payment}
       <Payment bind:progress {domain} {payment_address} {send_to_pub_key}/>
     {:else if progress === Progress.Declare}

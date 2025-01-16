@@ -30,7 +30,7 @@ export const POST: RequestHandler = async ({ request }) => {
   const receive_wallet = new Wallet(rpc, found.receive_seed);
   await receive_wallet.receive_all();
   await sleep(1500);
-  const balance = Number(raw_to_whole((await rpc.get_account_balance(receive_wallet.address)).balance));
+  const balance = Number(raw_to_whole(BigInt((await rpc.get_account_balance(receive_wallet.address)).balance)));
   if (balance < found.price) {
     return error(500, `Need to be sent ${found.price}, only got ${balance}`);
   }
