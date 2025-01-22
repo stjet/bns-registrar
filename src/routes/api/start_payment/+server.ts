@@ -23,7 +23,10 @@ export const POST: RequestHandler = async ({ request }) => {
     return error(500, "Payment for domain already pending, wait 5 minutes or so");
   }
   const payment_wallet = Wallet.gen_random_wallet();
-  await create_payment(db, domain, get_address_from_public_key(send_to_pub_key), payment_wallet.seed);
+  const success = await create_payment(db, domain, get_address_from_public_key(send_to_pub_key), payment_wallet.seed);
+  if (!success) {
+    return error(500, "Server error, try again");
+  }
   return json({
     payment_address: payment_wallet.address,
   });

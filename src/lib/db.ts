@@ -49,16 +49,17 @@ export async function find_payment(db: MongoClient, domain: string, send_to: str
 }
 
 //todo: technically possible for there to be race condition with payment_already_pending
-export async function create_payment(db: MongoClient, domain: string, send_to: string, receive_seed: string) {
+export async function create_payment(db: MongoClient, domain: string, send_to: string, receive_seed: string): bool {
   const price = get_price(domain.length);
   const payments = db.db("bns_backend").collection("payments");
-  await payments.insertOne({
+  const result = await payments.insertOne({
     domain,
     receive_seed, //seed to receive payment from
     send_to, //Domain Address (banano address) to send domain to after payment received
     price,
     timestamp: Date.now(),
   });
+  return result.acknowledged;
 }
 
 //

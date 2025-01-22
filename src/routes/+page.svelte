@@ -7,32 +7,40 @@
   let error: String = $state("");
   let price: String = $state("");
 
+  let address_register_safeguard: bool = true;
+
   function domain_keydown(event: KeyboardEvent) {
     let key = event.key.toLowerCase();
     if (!ALLOWED.includes(key)) {
       event.preventDefault();
-    } else {
-      price = "";
-      if (domain_content.length > 3) {
-        price = `Price: ${get_price(domain_content.length)} BAN`;
-      }
     }
   }
 
-  function domain_keyup() {
+  function domain_keyup(event: KeyboardEvent) {
+    if (domain_content.length > 3) {
+      price = `Price: ${get_price(domain_content.length)} BAN`;
+    } else {
+      price = "";
+    }
     domain_content = domain_content.toLowerCase();
   }
 
   async function domain_next() {
+    error = "";
     domain_content = domain_content.toLowerCase();
     if (domain_content.length < 4) {
       error = "Domain name must be more than 3 characters";
     } else {
+      //safeguard to make people don't accidentally paste in their banano address and register that
+      if (domain_content.startsWith("ban_") && domain_content.length === 32 && address_register_safeguard) {
+        alert("It seems like you entered a Banano address instead of the .ban domain name you want to register. Are you sure you want to do this? Try again if so.");
+        address_register_safeguard = false;
+        return;
+      }
       const resp = await (await fetch("/api/domain_issued?domain=" + domain_content)).json();
       if (resp.issued) {
-        error = "Domain name already issued, choose another one";
+        error = `Domain name <a href="https://creeper.banano.cc/account/${domain_content}.ban">already issued</a>, choose another one`;
       } else {
-        error = "";
         goto("/register?domain=" + domain_content);
       }
     }
@@ -97,7 +105,7 @@
           <input placeholder="Get your .ban on" maxlength="32" onkeydown={domain_keydown} onkeyup={domain_keyup} bind:value={domain_content} type="text"/><span>.ban</span><input onclick={domain_next} type="button" value="-->"/>
         </div>
         <span id="price">{price}</span>
-        <span class="error">{error}</span>
+        <span class="error">{@html error}</span>
         <div>
           <h2>Supported by:</h2>
           <div>
