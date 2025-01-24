@@ -59,7 +59,8 @@
 
 <style>
   #main {
-    height: 100vh;
+    min-height: 100vh;
+    height: 100%;
     box-sizing: border-box;
     padding: 10px;
     background-color: var(--green);
